@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block home %}
+<style>
+    .image{
+        min-width:118px;
+        min-height:168px;
+    }
+</style>
+
+{% if request.user.is_authenticated %}
+<nav class="navbar">
+    <span class="text-white m-3"><h1>LIBRARY MANAGEMENT SYSTEM</h1></span>
+    <div class="ml-auto m-3">
+        <a class="btn btn-outline-light" href="{% url 'add_book' %}">Add Book</a>
+        <a class="btn btn-outline-light" href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>
+{% endif %}
+<div class="container-fluid col-lg-12 col-md-6 col-sm-3">
+    <div class="row">
+{%for i in book %}
+<a href="{% url 'book_details' %}" class="card m-2 " style="width: 9rem;">
+    <img src="{{ i.image.url }}" class="image card-img-top" alt="">
+    <div class="card-body">
+        {% comment %} <p class="card-text">{{i.name}}</p> {% endcomment %}
+        {% comment %} <p class="card-text">{{ i.price }}</p> {% endcomment %}
+        {% comment %} <p class="card-text">{{ i.author }}</p> {% endcomment %}
+        {% comment %} <p class="card-text">{{ i.description }}</p> {% endcomment %}
+    </div>
+</a>
+{% endfor %}    
+</div>
+</div>
+{% endblock home %}
+
