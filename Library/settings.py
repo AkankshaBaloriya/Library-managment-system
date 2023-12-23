@@ -74,27 +74,27 @@ WSGI_APPLICATION = "Library.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'Library',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://mymongodb:Q5vSPtRBsVnghQVz@cluster0.yauasi1.mongodb.net/?retryWrites=true&w=majority',
-            'port': 27017,
-            'username': 'mymongodb',
-            'password': 'Q5vSPtRBsVnghQVz',
-            'authSource': 'admin'
-        }
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'Library',
+#         'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': 'mongodb+srv://mymongodb:Q5vSPtRBsVnghQVz@cluster0.yauasi1.mongodb.net/?retryWrites=true&w=majority',
+#             'port': 27017,
+#             'username': 'mymongodb',
+#             'password': 'Q5vSPtRBsVnghQVz',
+#             'authSource': 'admin'
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
