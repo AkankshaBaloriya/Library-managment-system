@@ -1,9 +1,144 @@
 {% extends "base.html" %}
 {%block book_details %}
+
+<style>
+  .container{display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card{padding:60px;
+  }
+</style>
+
 <nav class="navbar">
     <div class="ml-auto m-3">
         <a class="btn btn-outline-light" href="{% url 'home' %}">Go Back</a>
     </div>
   </nav>
 
+  <div class="container">
+    <div class="row">
+  <div class=" card mb-3" style="max-width: 700px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{context.image.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title mx-5">{{context.name}}</h5>
+          <hr>
+          <h5 class="card-text mx-5">{{context.price}}</h5>
+          <hr>
+          <h5 class="card-text mx-5">{{context.author}}</h5>
+          <hr>
+          <h5 class="card-text mx-5"><small >{{context.description}}</small></h5>
+          <hr>
+          <div class="container">
+          <button class="btn btn-primary mx-2"data-bs-toggle="modal" data-bs-target="#exampleModal1">Edit Books</button>
+
+          <button class="btn btn-primary mx-2 "data-bs-toggle="modal" data-bs-target="#exampleModal2">Delete Book</button>
+          </div>
+
+
+          <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="exampleModalLabel">Edit Book here</h5>
+                    <hr>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="m-2 p-3">
+                        <form action="book_details/" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="book" value="{{context.name}}" id="" hidden class="form-control" placeholder="" aria-describedby="helpId"></input>
+                            <div class="form-group">
+                              <label for="">Name</label>
+                              <input type="text" name="name" value="{{context.name}}" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="">Price</label>
+                                <input type="text" name="price" id="" value="{{context.price}}"class="form-control" placeholder="" aria-describedby="helpId"></input>
+                              </div>
+  
+                            <div class="form-group">
+                                <label for="">Author</label>
+                                <input type="text" name="author" value="{{context.author}}" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
+                              </div>
+                              
+                            <div class="form-group">
+                                <label for="">Description</label>
+                                <input type="text" name="description" value="{{context.description}}" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
+                              </div>  
+
+                            <div class="form-group">
+                                <label for="">Image</label>
+                                <input type="file" name="image" value="{{context.image.url}}" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
+                              </div>  
+                              <br>
+
+
+                                <button type="submit" value="save-edit"class="btn btn-primary float-end">Save Edit</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title fs-5" id="exampleModalLabel">Delete book </h5>
+                      <hr>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="m-2 p-3">
+                          <form action="book_details/" method="post">
+                              {% csrf_token %}
+                              <div class="form-group">
+                                <h5  for="">The Book "{{context.name}}" will be deleted</h5>
+                                <hr>
+                              </div>
+                                <br>
+                                <input class="text" hidden name="remove" value="{{context.name}}"></input>
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                          </form>
+                      </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+          {% comment %} <div class="container">
+          <form action="/" method="post">
+            {% csrf_token %}
+            <input type="text" hidden name="edit"></input>
+          <button type="submit" class="btn btn-primary mx-5">Edit Book</button>
+          </form>
+
+          <form action="/" method="post">
+            {% csrf_token %}
+            <input type="text" hidden name="remove" value="{{context.name}}"></input>
+          <button type="submit" class="btn btn-primary" >Delete Book</button>
+          </form>
+        </div> {% endcomment %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 {% endblock book_details %}

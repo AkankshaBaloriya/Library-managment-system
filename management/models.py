@@ -16,6 +16,7 @@ class Add(models.Model):
         allbooks=Add.objects.all()
         return allbooks
     
- 
-    
+    @staticmethod
+    def book_detail(book_name):
+        return Add.objects.get(name=book_name)   
     

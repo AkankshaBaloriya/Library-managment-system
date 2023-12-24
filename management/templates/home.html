@@ -6,6 +6,10 @@
         min-width:118px;
         min-height:168px;
     }
+
+    .ss{
+        width:170px;
+    }
 </style>
 
 {% if request.user.is_authenticated %}
@@ -18,17 +22,20 @@
 </nav>
 {% endif %}
 <div class="container-fluid col-lg-12 col-md-6 col-sm-3">
-    <div class="row">
+    <div class="row">        
 {%for i in book %}
-<a href="{% url 'book_details' %}" class="card m-2 " style="width: 9rem;">
+<form class="ss" action="/" method="post">
+ {% csrf_token %}   
+<button type="submit" class="btn card m-2 " style="width: 9rem;">
     <img src="{{ i.image.url }}" class="image card-img-top" alt="">
     <div class="card-body">
-        {% comment %} <p class="card-text">{{i.name}}</p> {% endcomment %}
+        <input class="card-text" hidden name="name" value="{{i.name}}"></input>
         {% comment %} <p class="card-text">{{ i.price }}</p> {% endcomment %}
         {% comment %} <p class="card-text">{{ i.author }}</p> {% endcomment %}
         {% comment %} <p class="card-text">{{ i.description }}</p> {% endcomment %}
     </div>
-</a>
+</button>
+</form>
 {% endfor %}    
 </div>
 </div>
