@@ -11,33 +11,34 @@
   }
 </style>
 
-<nav class="navbar">
+<nav class="navbar navbar-dark bg-success">
     <div class="ml-auto m-3">
         <a class="btn btn-outline-light" href="{% url 'home' %}">Go Back</a>
     </div>
   </nav>
-
+ <br>
   <div class="container">
     <div class="row">
   <div class=" card mb-3" style="max-width: 700px;">
     <div class="row g-0">
+      <center><h2>BOOK DETAILS</h2></center><hr>
       <div class="col-md-4">
         <img src="{{context.image.url}}" class="img-fluid rounded-start" alt="...">
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title mx-5">{{context.name}}</h5>
+          <h5 class="card-title mx-5">Name : <small><i>{{context.name}}</i></small></h5>
           <hr>
-          <h5 class="card-text mx-5">{{context.price}}</h5>
+          <h5 class="card-text mx-5">Price : <small><i>{{context.price}}</i></small></h5>
           <hr>
-          <h5 class="card-text mx-5">{{context.author}}</h5>
+          <h5 class="card-text mx-5">Author : <small><i>{{context.author}}</i></small></h5>
           <hr>
-          <h5 class="card-text mx-5"><small >{{context.description}}</small></h5>
+          <h5 class="card-text mx-5">Description : <small><i>{{context.description}}</i></small></h5>
           <hr>
           <div class="container">
-          <button class="btn btn-primary mx-2"data-bs-toggle="modal" data-bs-target="#exampleModal1">Edit Books</button>
+          <button class="btn btn-outline-success mx-2"data-bs-toggle="modal" data-bs-target="#exampleModal1">Edit Books</button>
 
-          <button class="btn btn-primary mx-2 "data-bs-toggle="modal" data-bs-target="#exampleModal2">Delete Book</button>
+          <button class="btn btn-outline-success mx-2"data-bs-toggle="modal" data-bs-target="#exampleModal2">Delete Book</button>
           </div>
 
 
