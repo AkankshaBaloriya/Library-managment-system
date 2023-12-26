@@ -4,9 +4,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Add
 
+def issue_book(request):
+    return render(request, 'issue_book.html')
 
 @login_required
-def add(request):
+def add_book(request):
     if request.method=='POST':
         name=request.POST.get("name")
         price=request.POST.get("price")
