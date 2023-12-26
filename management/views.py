@@ -26,12 +26,13 @@ def book_details(request):
             book =Add.book_detail(book_name)
             book.delete()
             return redirect('home')
+        
         elif "name" in request.POST:
             name1=request.POST.get('name')
             price1=request.POST.get('price')
             author1=request.POST.get('author')
             description1=request.POST.get('description')
-            image1=request.POST.get('image')
+            image1=request.FILES.get('image')
             print(name1)
             print(price1)
             print(author1)
@@ -41,18 +42,13 @@ def book_details(request):
             book=request.POST.get("book")
             
             change=Add.book_detail(book)
-            print(change.name)
-            print(change.price)
-            print(change.author)
-            print(change.description)
-            print(change.image.url)
-            
             change.name=name1
             change.price=price1
             change.author=author1
             change.description=description1
             change.image=image1
             change.save()
+            
             
             return redirect('home')
             
@@ -65,7 +61,8 @@ def home(request):
         book_details=Add.book_detail(name)
         context={}
         context["context"]=book_details
-        return render(request,"book_details.html",context)
+        print(book_details.image.url)
+        return render(request,"book_details.html",context)    
     else:    
         books=Add.showbook()
         context={}

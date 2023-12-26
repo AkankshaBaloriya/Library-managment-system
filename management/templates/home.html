@@ -26,6 +26,11 @@
 {%for i in book %}
 <form class="ss" action="/" method="post">
  {% csrf_token %}   
+ {% if error %}
+ <div class="alert alert-success" role="alert">
+ {{ error }}
+ </div>
+ {% endif %}
 <button type="submit" class="btn card m-2 " style="width: 9rem;">
     <img src="{{ i.image.url }}" class="image card-img-top" alt="">
     <div class="card-body">
