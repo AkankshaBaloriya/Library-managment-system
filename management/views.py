@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Add
+import re
 
 def issue_book(request):
     return render(request, 'issue_book.html')
@@ -56,30 +57,29 @@ def book_details(request):
 def home(request):
     if request.method=="POST":
         if "search" in request.POST:
-            search_book=request.POST.get("search")
-            # print(search_book)
-            books=[]
-            all_book=Add.showbook()
-            for i in all_book:
-                iname=i.name.upper()
-                search_book=search_book.upper()
-                if iname==search_book:
-                    books.append(i)
-                else:
-                    cut=iname
-                    split=cut.split()   
-                    for j in split:
-                        if j==search_book:
-                            books.append(i)
-            print(books)
-            error=f"The Book named {search_book.lower().capitalize()} is not available"
+            search_book = request.POST.get("search")
+            books = []
+            all_books = Add.showbook()
+
+            if not search_book:
+                return redirect('home')
+
+            for book in all_books:
+                iname = book.name.upper()
+                search_book = search_book.upper()
+                if re.search(search_book, iname):
+                    books.append(book)
             context={}
             context["book"]=books
+
             if books:                
+                message  = f"Search Results.."
+                context["message"] = message
                 return render(request, 'home.html',context)                
             else:
-                context["book"]=all_book
-                context['error']=error    
+                error = f"The Book with the name containing '{search_book.lower().capitalize()}' is not available"
+                context["book"] = all_books
+                context['error'] = error    
                 return render(request, 'home.html',context) 
                             
         name=request.POST.get('name')
