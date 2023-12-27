@@ -12,10 +12,11 @@ def add_book(request):
     if request.method=='POST':
         name=request.POST.get("name")
         price=request.POST.get("price")
+        quantity=request.POST.get("quantity")
         author=request.POST.get("author")
         description=request.POST.get("description")
         image = request.FILES.get("image")
-        AddBooks=Add(name=name, price=price, author=author, description=description, image=image)
+        AddBooks=Add(name=name, price=price, quantity=quantity, author=author, description=description, image=image)
         AddBooks.save()
         return HttpResponseRedirect('/')
         
@@ -35,11 +36,6 @@ def book_details(request):
             author1=request.POST.get('author')
             description1=request.POST.get('description')
             image1=request.FILES.get('image')
-            print(name1)
-            print(price1)
-            print(author1)
-            print(description1)
-            print(image1)
             
             book=request.POST.get("book")
             
@@ -59,18 +55,44 @@ def book_details(request):
 @login_required
 def home(request):
     if request.method=="POST":
+        if "search" in request.POST:
+            search_book=request.POST.get("search")
+            # print(search_book)
+            books=[]
+            all_book=Add.showbook()
+            for i in all_book:
+                iname=i.name.upper()
+                search_book=search_book.upper()
+                if iname==search_book:
+                    books.append(i)
+                else:
+                    cut=iname
+                    split=cut.split()   
+                    for j in split:
+                        if j==search_book:
+                            books.append(i)
+            print(books)
+            error=f"The Book named {search_book.lower().capitalize()} is not available"
+            context={}
+            context["book"]=books
+            if books:                
+                return render(request, 'home.html',context)                
+            else:
+                context["book"]=all_book
+                context['error']=error    
+                return render(request, 'home.html',context) 
+                            
         name=request.POST.get('name')
         book_details=Add.book_detail(name)
         context={}
         context["context"]=book_details
-        print(book_details.image.url)
         return render(request,"book_details.html",context)    
     else:    
         books=Add.showbook()
         context={}
         context["book"]=books
         return render(request, 'home.html',context)
-
+    
 
 def user_logout(request):
     logout(request)

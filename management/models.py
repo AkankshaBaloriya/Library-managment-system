@@ -7,6 +7,7 @@ class Add(models.Model):
     author=models.CharField(max_length=20, default=None)
     description=models.TextField(max_length=100, default=None)
     image=models.ImageField(upload_to='books', default='default.jpg')
+    quantity=models.IntegerField(default=1)
     
     def __str__(self):
         return self.name
