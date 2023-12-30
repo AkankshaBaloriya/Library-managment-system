@@ -75,6 +75,7 @@
                                 <input type="text" name="description" value="{{context.description}}" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
                               </div>  
                             <div class="form-group">
+                                <label for="">Image</label>
                                 <input type="file" name="image" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
                               </div>  
                               <br>
@@ -105,7 +106,7 @@
                                 <hr>
                               </div>
                                 <br>
-                                <input class="text" hidden name="remove" value="{{context.name}}"></input>
+                                <input class="text" hidden name="remove" value="{{context.id}}"></input>
                                 <button type="submit" class="btn btn-primary">Delete</button>
                           </form>
                       </div>
