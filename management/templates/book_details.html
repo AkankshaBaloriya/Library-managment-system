@@ -36,9 +36,9 @@
           <h5 class="card-text mx-5">Description : <small><i>{{context.description}}</i></small></h5>
           <hr>
           <div class="container">
-          <button class="btn btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal1">Edit Books</button>
+          <button class="btn btn-outline-success mx-2"data-bs-toggle="modal" data-bs-target="#exampleModal1">Edit Books</button>
 
-          <button class="btn btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal2">Delete Book</button>
+          <button class="btn btn-outline-success mx-2"data-bs-toggle="modal" data-bs-target="#exampleModal2">Delete Book</button>
           </div>
 
 
@@ -54,7 +54,7 @@
                     <div class="m-2 p-3">
                         <form action="book_details/" method="post" enctype="multipart/form-data" >
                             {% csrf_token %}
-                            <input type="text" name="book" value="{{context.id}}" id="" hidden class="form-control" placeholder="" aria-describedby="helpId"></input>
+                            <input type="text" name="book" value="{{context.name}}" id="" hidden class="form-control" placeholder="" aria-describedby="helpId"></input>
                             <div class="form-group">
                               <label for="">Name</label>
                               <input type="text" name="name" value="{{context.name}}" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
@@ -74,11 +74,14 @@
                                 <label for="">Description</label>
                                 <input type="text" name="description" value="{{context.description}}" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
                               </div>  
-                            <div class="form-group">
-                                <input type="file" name="image" id="" class="form-control" placeholder="" aria-describedby="helpId"></input>
-                              </div>  
+
+                              <div class="form-group">
+                                <label for="image">Choose an Image:</label>
+                                <input type="file" required name="image" id="image" class="form-control" placeholder="" aria-describedby="helpId">
+                            </div>
+                             
                               <br>
-                                <button type="submit" value="save-edit" class="btn btn-primary float-end">Save Edit</button>
+                                <button type="submit" value="save-edit"class="btn btn-primary float-end">Save Edit</button>
                         </form>
                     </div>
                 </div>
@@ -105,7 +108,7 @@
                                 <hr>
                               </div>
                                 <br>
-                                <input class="text" hidden name="remove" value="{{context.name}}"></input>
+                                <input class="text" hidden name="remove" value="{{context.id}}"></input>
                                 <button type="submit" class="btn btn-primary">Delete</button>
                           </form>
                       </div>
