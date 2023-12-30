@@ -2,10 +2,25 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Add
+from .models import Add, Issue_book
 import re
 
 def issue_book(request):
+    if request.method=="POST":
+        if "student_name" in request.POST:
+            student_name=request.POST.get('student_name')
+            student_id=request.POST.get('student_id')
+            branch=request.POST.get('branch')
+            section=request.POST.get('section')
+            book_name=request.POST.get('book_name')
+            book_id=request.POST.get('book_id')
+            quantity=request.POST.get('quantity')
+            date_of_issue=request.POST.get('date_of_issue')
+            date_of_return=request.POST.get('date_of_return')
+            
+            issue_books=Issue_book(student_name=student_name, student_id=student_id, branch=branch, section=section, Book_name=book_name, Book_id=book_id, quantity=quantity, date_of_issue=date_of_issue, date_of_return=date_of_return)
+            issue_books.save()
+            return render(request, 'issue_book.html')
     return render(request, 'issue_book.html')
 
 @login_required
@@ -38,7 +53,12 @@ def book_details(request):
             description1=request.POST.get('description')
             image1=request.FILES.get('image')
             
+            
             book=request.POST.get("book")
+            if not image1:
+                new_image=Add.book_detail(book)
+                image1=new_image.image    
+            
             
             change=Add.book_detail(book)
             change.name=name1
@@ -82,8 +102,8 @@ def home(request):
                 context['error'] = error    
                 return render(request, 'home.html',context) 
                             
-        name=request.POST.get('name')
-        book_details=Add.book_detail(name)
+        id=request.POST.get('id')
+        book_details=Add.book_detail(id)
         context={}
         context["context"]=book_details
         return render(request,"book_details.html",context)    

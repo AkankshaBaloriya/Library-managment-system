@@ -13,4 +13,66 @@
         <span class="text-white m-3"><h1>LIBRARY MANAGEMENT SYSTEM</h1></span>
     </a>
 </nav>
+
+
+<div class="container">
+    <div class="p-9 m-4">
+    <div class="col-lg-5 mb-4 mx-auto ">
+    <form action="/issue_book/" method="post">
+        {% csrf_token %}
+        <div class="container bg-white flex-center p-4 border rounded ">
+        <h3>Issue Book</h3>
+        <div class="mb-1 mt-4" >
+          <label for="exampleInputEmail1" class="form-label"><h6>Student Name</h6></label>
+          <input type="text" required name="student_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+    
+        <div class="mb-1">
+          <label for="exampleInputPassword1" class="form-label"><h6>Student Id</h6></label>
+          <input type="text" required  name="student_id"class="form-control" id="exampleInputPassword1">
+        </div>
+    
+        <div class="mb-1">
+          <label for="exampleInputPassword1" class="form-label"><h6>Branch</h6></label>
+          <input type="text" required  name="branch"class="form-control" id="exampleInputPassword1">
+        </div>
+    
+          <div class="mb-1">
+            <label for="exampleInputPassword1" class="form-label"><h6>Section</h6></label>
+            <input type="text" required  name="section"class="form-control" id="exampleInputPassword1">
+          </div>
+    
+          <div class="mb-2">
+            <label for="exampleInputPassword1" class="form-label"><h6>Book Name</h6></label>
+            <input type="text" required  name="book_name"class="form-control" id="exampleInputPassword1">
+          </div>
+    
+    
+          <div class="mb-2">
+            <label for="exampleInputPassword1" class="form-label"><h6>Book Id</h6></label>
+            <input type="text" required  name="book_id" class="form-control" id="exampleInputPassword1">
+          </div>
+
+
+          <div class="mb-2">
+            <label for="exampleInputPassword1" class="form-label"><h6>Quantity</h6></label>
+            <input type="text" required  name="quantity" class="form-control" id="exampleInputPassword1">
+          </div>
+
+
+          <div class="mb-2">
+            <label for="exampleInputPassword1" class="form-label"><h6>Date of issue</h6></label>
+            <input type="Date" required  name="date_of_issue" class="form-control" id="exampleInputPassword1">
+          </div>
+
+          <div class="mb-2">
+            <label for="exampleInputPassword1" class="form-label"><h6>Date of return</h6></label>
+            <input type="Date" required  name="date_of_return" class="form-control" id="exampleInputPassword1">
+          </div>
+    
+        <button type="submit" class="form-control btn btn-success">Issue Book</button>
+      </form>
+    </div>
+    </div>
+    </div>
 {% endblock issue_book %}
