@@ -1,12 +1,16 @@
 from django.contrib import admin
-from .models import Add,Issue_book
+from .models import Add, Student, IssuedBook
 
 class AddModelAdmin(admin.ModelAdmin):  
-    list_display = ("name",)
+    list_display = ["name", "price", "author", "quantity"]
 
-class Adminissuebook(admin.ModelAdmin):
-    list_display=('student_name',)
+class StudentModelAdmin(admin.ModelAdmin):
+    list_display = ["name", "branch", "roll_no", "phone"]
 
-# Register your models here.
+class IssuedBookModelAdmin(admin.ModelAdmin):
+    list_display = ["student_id", "isbn", "issued_date", "expiry_date"]
+
+
 admin.site.register(Add, AddModelAdmin)
-admin.site.register(Issue_book,Adminissuebook)
+admin.site.register(Student, StudentModelAdmin)
+admin.site.register(IssuedBook, IssuedBookModelAdmin)
