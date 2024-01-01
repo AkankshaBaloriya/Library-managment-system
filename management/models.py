@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime, timedelta
 
 # Create your models here.
 class Add(models.Model):
@@ -20,15 +21,23 @@ class Add(models.Model):
     @staticmethod
     def book_detail(id):
         return Add.objects.get(id=id)   
+
+class Student(models.Model):
+    name = models.CharField(max_length=16)
+    classroom = models.CharField(max_length=10)
+    branch = models.CharField(max_length=10)
+    roll_no = models.CharField(max_length=3, blank=True)
+    phone = models.CharField(max_length=10, blank=True)
+ 
+    def __str__(self):
+        return str(self.user) + " ["+str(self.branch)+']' + " ["+str(self.classroom)+']' + " ["+str(self.roll_no)+']'
+ 
+def expiry():
+    return datetime.today() + timedelta(days=14)
+
+class IssuedBook(models.Model):
+    student_id = models.CharField(max_length=100, blank=True) 
+    isbn = models.CharField(max_length=13)
+    issued_date = models.DateField(auto_now=True)
+    expiry_date = models.DateField(default=expiry)   
     
-    
-class Issue_book(models.Model):
-    student_name=models.CharField(max_length=50,default=None)
-    student_id=models.IntegerField(default=0)
-    branch=models.CharField(max_length=20, default=None)
-    section=models.CharField(max_length=100, default=None)
-    Book_name=models.CharField(max_length=100, default=None)
-    Book_id=models.IntegerField(default=1) 
-    quantity=models.IntegerField(default=1)    
-    date_of_issue=models.DateField(("Date of Issue"), auto_now=False, auto_now_add=False)
-    date_of_return=models.DateField(("Date of Return"), auto_now=False, auto_now_add=False)

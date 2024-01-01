@@ -2,26 +2,8 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Add, Issue_book
+from .models import Add
 import re
-
-def issue_book(request):
-    if request.method=="POST":
-        if "student_name" in request.POST:
-            student_name=request.POST.get('student_name')
-            student_id=request.POST.get('student_id')
-            branch=request.POST.get('branch')
-            section=request.POST.get('section')
-            book_name=request.POST.get('book_name')
-            book_id=request.POST.get('book_id')
-            quantity=request.POST.get('quantity')
-            date_of_issue=request.POST.get('date_of_issue')
-            date_of_return=request.POST.get('date_of_return')
-            
-            issue_books=Issue_book(student_name=student_name, student_id=student_id, branch=branch, section=section, Book_name=book_name, Book_id=book_id, quantity=quantity, date_of_issue=date_of_issue, date_of_return=date_of_return)
-            issue_books.save()
-            return render(request, 'issue_book.html')
-    return render(request, 'issue_book.html')
 
 @login_required
 def add_book(request):
