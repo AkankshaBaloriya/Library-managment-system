@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Add
 import re
 
+def dashboard(request):
+    return render(request,"dashboard.html")
+
 @login_required
 def add_book(request):
     if request.method=='POST':
