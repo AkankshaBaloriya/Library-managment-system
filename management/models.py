@@ -24,7 +24,7 @@ class Add(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=16)
-    classroom = models.CharField(max_length=10)
+    room_no = models.CharField(max_length=10)
     branch = models.CharField(max_length=10)
     roll_no = models.CharField(max_length=3, blank=True)
     phone = models.CharField(max_length=10, blank=True)
